@@ -1,0 +1,153 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
+    
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+
+    <meta name="description" content="Argument graph">
+    <title>GraphItFor.me</title>
+
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="js/vendor/jquery-1.11.2.min.js"></script>
+    <script src="js/vendor/underscore-min.js"></script>
+    <script src="js/vendor/lz-string.min.js"></script>
+    <script src="js/vendor/d3.v3.min.js"></script>
+    <script src="js/vendor/dagre-d3.js"></script>
+    <script src="js/vendor/base64.js"></script>
+    <script src="js/plugins.js"></script>
+    
+    <script src="js/utils.js"></script>
+    <script src="js/code_parser.js"></script>
+    <script src="js/code_loader.js"></script>
+    <script src="js/svg-ui.js"></script>
+    <script src="js/png-io.js"></script>
+    <script src="js/main.js"></script>
+  </head>
+  <body class="colorscheme1" style="display:none;" onload="javascript:initializeGraphIt()">
+
+    <!-- tool for screenshot -->
+    <canvas id="canvas" style="display:none;"></canvas>
+    
+    <!-- description popup -->
+    <div id="detailsPopup">
+      <img id="closeImg" src="img/cross.png" style="float:right" onClick="javascript:closePopup()"/>
+      <h4 id="detailsPopupTitle" style="display:block;margin:0 0 20px 0;"></h4>
+      <div style="clear:both;"></div>
+      <div id="detailsPopupContent"></div>
+    </div>
+    
+    <!-- full page drawing space -->
+    <div>
+    <svg id="svg-canvas" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <g id="svgGroup"></g>
+    </svg>
+    </div>
+
+    <!-- left coding section -->
+    <textarea id="config-textarea" spellcheck="false" wrap="off" onKeyUp="javascript:onConfigChange()"></textarea>
+
+    <textarea id="lines-textarea" readonly="true"></textarea>
+    <div id="errorLine"></div>
+
+    
+    <!-- info box -->
+    <div id="graphit-info" style="display:none;">
+      
+      <div  id="graphit-info-text">
+        <h4>Syntax</h4>
+       
+        You can define the orientation of the graph at the beginning by adding one of:<br/>
+        <ul class="code">
+          <li><pre>Top-Bottom</pre></li>
+          <li><pre>Bottom-Top</pre></li>
+          <li><pre>Right-Left</pre></li>
+          <li><pre>Left-Right</pre></li>
+        </ul>
+        
+        Then, define the nodes and edges with:
+        <br/>
+        <pre class="code">+ID:TEXT:DEPENDENCIES</pre>
+        <br/>
+        This will create a node width a link going from the dependencies to the node. You can specify several dependencies using a comma as the delimiter.<br/>
+        <br/>
+        Example: 
+        <pre class="code">
++P1:Paris is in France
++P1:France is in Europe
++P3:Paris is in Europe:P1,P2
+        </pre>
+        
+        <h4>Save & Share</h4>
+        
+        <p class="info-usage">
+          Use the <img src="img/typicons/camera.png" /> icon to download a copy of your current graph as an image.
+        </p>
+        <p class="info-usage">
+          You can reopen it at any time with <img src="img/typicons/folder.png" /> and resume your work.
+        </p>
+        <p class="info-usage">
+          Alternatively, you can save the text of your graph or send it in order to share it.
+        </p>
+        <p class="info-usage">
+          You can also get a link to your graph with <img src="img/typicons/share.png" />.
+        </p>
+        
+        <h4>Credits</h4>
+        
+        <p>The design of this tool has been largely inspired by <a target="_blank" href="http://www.nomnoml.com/">nomnoml.com</a>.
+        A huge thanks to <a target="_blank" href="https://github.com/skanaar">Daniel Kallin</a> for letting me reuse it!</p>
+        
+        <ul id="thanks-libs">Additional thanks to:
+         <li><a target="_blank" href="http://d3js.org/">D3</a></li>
+         <li><a target="_blank" href="https://github.com/cpettitt/dagre-d3">Dagre</a></li>
+         <li><a target="_blank" href="https://jquery.com/">jQuery</a></li>
+         <li><a target="_blank" href="http://typicons.com/">Typicons</a></li>
+        </ul>
+        
+      </div>
+    </div>
+    
+    <!-- action bar -->
+    
+    <div id="action-bar-bg" style="display:none;"></div>
+    
+    <span id="actionDetails"></span>
+    
+    <a href="javascript:toggleFullScreenGraph()" class="action-item" id="graph-fullscreen"><img src="img/typicons/fullscreen.png" /></a>
+    
+    <a href="javascript:toggleMoreInfo()" class="action-item" id="more-info"><img src="img/typicons/info.png" /></a>
+    
+    <a class="action-item hideForIE" id="saveImageLink" download="graph.png">
+      <img onclick="javascript:updateSaveImageUrl()" src="img/typicons/camera.png" />
+    </a>
+    
+    <div class="action-item file-upload hideForIE">
+      <div class="label"><img src="img/typicons/folder.png" /></div>
+      <input type="file" id="loadGraphFile" class="fileinput" />
+    </div>
+  
+    <a href="" class="action-item" id="permalink" target="_blank">
+      <img onclick="javascript:updatePermaLink()" src="img/typicons/share.png" />
+    </a>
+    
+    <div class="showForIE" id="ie-warning" style="display:none;">
+      Please choose a different browser than Internet Explorer to access all the features.
+      <a target="_blank" href="https://connect.microsoft.com/IE/feedback/details/1013555/ie-11-wrongly-throws-securityerror-on-canvas-todataurl-image-png">Why?</a>
+      <a id="close-ie-warning" href="javascript:closeIEWarning()">[hide]</a>
+    </div>
+  </body>
+</html>
