@@ -178,14 +178,18 @@ function centerGraph(centerPos, scale) {
 }
 
 function resizeContainers() {
-  var h = $(window).height() 
-  $("#svg-canvas").attr("width",$(window).width())
+  var dim = getWindowSize()
+  console.log(dim)
+  var w = dim[0]
+  var h = dim[1]
+  
+  $("#svg-canvas").attr("width",w)
   $("#svg-canvas").attr("height",h)
   
   if (graphitConfig.fullScreenTextarea) {
-    $("#config-textarea").css("width", $(window).width() - lineTextareaWidth)
+    $("#config-textarea").css("width", w - lineTextareaWidth)
   } else {
-    $("#config-textarea").css("width", Math.round($(window).width() * currentConfigTextareaRatio))
+    $("#config-textarea").css("width", Math.round(w * currentConfigTextareaRatio))
   }
   $("#config-textarea").css("height",h)
   $("#lines-container").css("height",h)
@@ -194,6 +198,6 @@ function resizeContainers() {
 }
 
 function getWindowSize() {
-  return [$(document).width(), $(document).height()];
+  return [window.innerWidth,  window.innerHeight];
 }
 
