@@ -41,21 +41,26 @@ function initializeGraphIt() {
     return
   }
 
-  var dataId = QueryString.p ? QueryString.p : graphitConfig.defaultGraphId
+  if (QueryString.p) {
+    var dataId = QueryString.p
 
-  loadData({
-    dataId: dataId,
-    onload: function(code) {
-      startGraphIt(code)
-    },
-    onerror: function() {
-      console.log("Failed to load data "+dataId)
-    }
-  })
+    loadData({
+      dataId: dataId,
+      onload: function(code) {
+        startGraphIt(code)
+      },
+      onerror: function() {
+        console.log("Failed to data "+dataId)
+      }
+    })
+    return
+  }
+  
+  startGraphIt()
 }
 
 function startGraphIt(code) {
-  $("#config-textarea").val( code )
+  if (code) $("#config-textarea").val( code )
   onConfigChange()
   initializeUI()
 	var onRedrawComplete = function(){

@@ -58,7 +58,19 @@
     </div>
 
     <!-- left coding section -->
-    <textarea id="config-textarea" spellcheck="false" wrap="off" onKeyUp="javascript:onConfigChange()"></textarea>
+    <textarea id="config-textarea" spellcheck="false" wrap="off" onKeyUp="javascript:onConfigChange()">
+# Orientation (Top-Bottom, Bottom-Top, Left-Right, Right-Left)
+Top-Bottom
+
+# Nodes (+KEY:TITLE:DEPENDENCIES)
++P1:Boredom
++P2:Thoughts about Death:P1
++P3:Absurdity of life:P1
++P4:Existential Anxiety:P2,P3
++P5:Pascalian Diversion - Entertainment is Essential:P4
++P6:Entertainment is diverting from the Essential
++P7:It is Essential to divert from the Essential:P5,P6
++P8:Paradox:P7</textarea>
 
     <textarea id="lines-textarea" readonly="true"></textarea>
     <div id="errorLine"></div>
@@ -82,9 +94,7 @@
         <br/>
         <pre class="code">+ID:TEXT:DEPENDENCIES</pre>
         <br/>
-        This will create a node width a link going from the dependencies to the node. You can specify several dependencies using a comma as the delimiter.<br/>
-        <br/>
-        Example: 
+        This will create a node with a link going from the dependencies to the node. You can specify several dependencies using a comma as the delimiter:<br/>
         <pre class="code">
 +P1:Paris is in France
 +P1:France is in Europe
