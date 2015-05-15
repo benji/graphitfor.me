@@ -177,7 +177,7 @@ function onNodesReady(loader, onComplete) {
     for (i in sources) {
       if (sources[i] in nodes) d3Graph.setEdge(sources[i], id, {
 				id: sources[i] + "-" + id,
-				lineInterpolate: 'basis'
+				lineInterpolate: 'bundle' // https://github.com/mbostock/d3/wiki/SVG-Shapes#line_interpolate
 			});
     }
   }
