@@ -62,15 +62,29 @@
 # Orientation (Top-Bottom, Bottom-Top, Left-Right, Right-Left)
 Top-Bottom
 
+# Based on http://papers.risingsea.net/JAPA/adapt.html
+
 # Nodes (+KEY:TITLE:DEPENDENCIES)
-+P1:Boredom
-+P2:Thoughts about Death:P1
-+P3:Absurdity of life:P1
-+P4:Existential Anxiety:P2,P3
-+P5:Pascalian Diversion - Entertainment is Essential:P4
-+P6:Entertainment is diverting from the Essential
-+P7:It is Essential to divert from the Essential:P5,P6
-+P8:Paradox:P7</textarea>
++GW_HUMANS:Human Activity
+Fossil Fuels, Rice Cultivation, Fertilizers, Refrigeration, etc.
++GW_ATM_CHGE:Changes in Atmosphere Composition:GW_HUMANS
++GW_RISE_TEMP:Rising Global Temperatures:GW_ATM_CHGE
++GW_SEA_LVL:Sea Level Rise:GW_RISE_TEMP
+Ocean Water Expands, Mountain Glaciers Melt, Greenland and Antarctic Glaciers Slide into the Oceans
++GW_LNDSCP:Changes in Landscape:GW_SEA_LVL
+Wetland Loss, Beach Erosion, Coastal Flooding
+
++GW_CLIMATE_CHGE:Change in Local Climate:GW_RISE_TEMP
++GW_DROUGHT:Increased Drought:GW_CLIMATE_CHGE
++GW_WARM_TEMP:Warmer Temperatues:GW_CLIMATE_CHGE
+
++GW_SALTWATR:Saltwater Intrusion:GW_SEA_LVL
+
++GW_LESS_WATR:Reduced Water Supply:GW_DROUGHT,GW_SALTWATR
+
++GW_PLANT_GROW:Benefits Plant Growth:GW_ATM_CHGE,GW_WARM_TEMP,
+
++GW_PLANT_UNGROW:Adverse Effect on Plant Growth:GW_DROUGHT,GW_LESS_WATR</textarea>
 
     <textarea id="lines-textarea" readonly="true"></textarea>
     <div id="errorLine"></div>
