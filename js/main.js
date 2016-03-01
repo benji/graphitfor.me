@@ -40,6 +40,10 @@ function initializeGraphIt() {
     startGraphIt(code)
     return
   }
+  
+  if (QueryString.f) {
+    fullscreen = true
+  }
 
   if (QueryString.p) {
     var dataId = QueryString.p
