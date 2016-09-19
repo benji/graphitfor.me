@@ -161,7 +161,7 @@ function onNodesReady(loader, onComplete) {
 
   // Create new graph
   d3Graph = new dagreD3.graphlib.Graph()
-    .setGraph({ rankdir:loader.orientation, nodesep: 50, edgesep: 10, ranksep: 30, marginx:10, marginy:10 })
+    .setGraph({ rankdir:loader.orientation, nodesep: parseInt(loader.nodeParams.nodesep), edgesep: 10, ranksep: parseInt(loader.nodeParams.ranksep), marginx:10, marginy:10 })
     .setDefaultEdgeLabel(function() { return {}; });
   
   // Add nodes and links

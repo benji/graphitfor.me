@@ -17,7 +17,9 @@ var CodeParser = function(options) {
     orientation: 'TB',
     imports: options.imports || {},
     nodeParams: {
-      color: '#fff'
+      color: '#fff',
+      nodesep: "50",
+      ranksep: "30"
     },
 
     onSuccess: options.onSuccess || function(){},

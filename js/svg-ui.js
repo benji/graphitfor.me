@@ -179,7 +179,7 @@ function centerGraph(centerPos, scale) {
 
 function resizeContainers() {
   var dim = getWindowSize()
-  console.log(dim)
+  //console.log(dim)
   var w = dim[0]
   var h = dim[1]
   

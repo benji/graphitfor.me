@@ -8,6 +8,7 @@ function CodeLoader(options) {
     nodes: {},
     imports: {},
     orientation: 'TB',
+    nodeParams: {},
 
     onError: function(err) {
       this.error = err
@@ -19,6 +20,7 @@ function CodeLoader(options) {
       
       this.loadCodeNoImports(code, function(parser) {
         thisLoader.orientation = parser.orientation
+        thisLoader.nodeParams = parser.nodeParams
         thisLoader.collectParserResults(parser)
         thisLoader.checkLoaded(onSuccess)
       })
