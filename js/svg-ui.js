@@ -64,11 +64,11 @@ function toggleFullScreenGraph(forceFullScreen) {
 	if (forceFullScreen || notFullScreen) {
 		oldGraphCenter = getGraphCenter()
 		$("svg").css("z-index","100")
-		centerGraph(optimalGraphCenter(true))
+		centerGraph(optimalGraphCenter())
     fullscreen = true
 	} else {
 		$("svg").css("z-index","")
-		centerGraph(oldGraphCenter)
+		//centerGraph(oldGraphCenter)
     fullscreen = false
 	}
 }
@@ -140,12 +140,22 @@ function getGraphCenter() {
 	}
 }
 
-function optimalGraphCenter(forFullScreen) {
+function optimalGraphCenter() {
 		var defaultCenter
 		var windowWidth = svg.attr("width")
-			
-		if (forFullScreen) {
-			defaultCenter = [svg.attr("width")/2, svg.attr("height")/2]
+    var windowHeight = svg.attr("height")
+    
+    var svgWidth = d3Graph.graph().width * currentSvgScale/2
+    var svgHeight = d3Graph.graph().height * currentSvgScale/2
+	
+		if (graphitConfig.fullScreenTextarea) {
+      var comfyMargin = 20
+      // var defaultWidth = svg.attr("width")/2
+      var defaultWidth = windowWidth - svgWidth - comfyMargin
+
+      // var defaultHeight =  svg.attr("height")*.7
+      var defaultHeight =  windowHeight - svgHeight - comfyMargin
+			defaultCenter = [defaultWidth, defaultHeight]
 		} else {
 			// X
 			var configTextareaWidth = parseInt(windowWidth*currentConfigTextareaRatio)
@@ -154,18 +164,18 @@ function optimalGraphCenter(forFullScreen) {
 			
 			defaultCenter = [ totalTextareasWidth + .5*spaceLeftForDrawing, svg.attr("height")/2 ]
 		}
-			
-		var notOverRightEdgeX = Math.min(defaultCenter[0], windowWidth-d3Graph.graph().width * currentSvgScale/2)
-		var notOverLeftEdgeX = Math.max(notOverRightEdgeX, d3Graph.graph().width * currentSvgScale/2)
+	  
+		var notOverRightEdgeX = Math.min(defaultCenter[0], windowWidth - svgWidth)
+		var notOverLeftEdgeX = Math.max(notOverRightEdgeX, svgWidth)
 		
-		var notOverBottomEdgeY = Math.min(defaultCenter[1], windowWidth-d3Graph.graph().height * currentSvgScale/2)
-		var notOverTopEdgeY = Math.max(notOverBottomEdgeY, d3Graph.graph().height * currentSvgScale/2)
+		var notOverBottomEdgeY = Math.min(defaultCenter[1], windowHeight - svgHeight)
+		var notOverTopEdgeY = Math.max(notOverBottomEdgeY, svgHeight)
 		
 		return [ notOverLeftEdgeX, notOverTopEdgeY ]
 }
 
 function centerGraph(centerPos, scale) {
-	if (centerPos) {} else { centerPos = optimalGraphCenter(); }
+	if (centerPos) {} else { centerPos = optimalGraphCenter(graphitConfig.fullScreenTextarea); }
   if (scale) {} else { scale = currentSvgScale; }
   
   // Center the graph

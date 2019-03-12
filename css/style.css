@@ -22,8 +22,8 @@ body.colorscheme0 #config-textarea { background: rgba(199,208,213,.4); }
 body.colorscheme0 #lines-textarea { background: rgba(170,170,170,.4) }
 
 body.colorscheme1 { background: #F5F5F5; }
-body.colorscheme1 #config-textarea { background: rgba(189, 210, 221, 0.0); }
-body.colorscheme1 #lines-textarea { background: rgba(131, 161, 178, 0.2); }
+body.colorscheme1 #config-textarea { background: rgba(247, 247, 247, 0.5); }
+body.colorscheme1 #lines-textarea { background: rgba(131, 161, 178, 0.4); }
 
 body.colorscheme2 { background: #FBF5FF; }
 body.colorscheme2 #config-textarea { background: rgba(0, 0, 0,.05); }
