@@ -151,10 +151,12 @@ function optimalGraphCenter() {
 		if (graphitConfig.fullScreenTextarea) {
       var comfyMargin = 20
       // var defaultWidth = svg.attr("width")/2
-      var defaultWidth = windowWidth - svgWidth - comfyMargin
+      // var defaultWidth = windowWidth - svgWidth - comfyMargin
+			var defaultWidth =  Math.min(windowWidth - svgWidth - comfyMargin, windowWidth*.75)
 
       // var defaultHeight =  svg.attr("height")*.7
-      var defaultHeight =  windowHeight - svgHeight - comfyMargin
+      // var defaultHeight =  windowHeight - svgHeight - comfyMargin
+			var defaultHeight =  Math.min(windowHeight - svgHeight - comfyMargin, windowHeight*.5)
 			defaultCenter = [defaultWidth, defaultHeight]
 		} else {
 			// X
