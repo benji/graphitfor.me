@@ -37,7 +37,8 @@ function initializeUI(){
   }
 
   // EVENT: file select
-  document.getElementById('loadGraphFile').addEventListener('change', handleFileSelect, false);
+  var loadGraphElement = document.getElementById('loadGraphFile')
+  if (loadGraphElement) loadGraphElement.addEventListener('change', handleFileSelect, false);
   // EVENT: window resize
   $( window ).resize( onWindowResize )
   // EVENT: zoom
@@ -77,9 +78,17 @@ function closeIEWarning(){
   $('#ie-warning').hide()
 }
 
-function toggleMoreInfo(){
-  $('#graphit-info').toggle()
-  $('#action-bar-bg').toggle()
+var currentSideId = null;
+function toggleSide(id) {
+  if (currentSideId === id) { // clock on same id as currently shown
+    $('#graphit-info').hide()
+    currentSideId = null
+  } else {
+    $('.graphit-side-element').hide() // hide all
+    $('#graphit-info').show() // show parent
+    $('#graphit-side-'+id).show() // show child
+    currentSideId = id;
+  }
 }
 
 function setupHoverActionText(selector, text){

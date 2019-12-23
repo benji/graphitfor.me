@@ -34,6 +34,7 @@ function check(nodes) {
 function initializeGraphIt() {
   console.log("Graphit starts...")
 
+  console.log(QueryString.d)
   if (QueryString.d) {
     fullscreen = true
     var code = LZString.decompressFromBase64(QueryString.d)
@@ -59,8 +60,27 @@ function initializeGraphIt() {
     })
     return
   }
+
+  loadOnestore();
   
   startGraphIt()
+}
+
+var onestore
+function loadOnestore() {
+  try {
+    onestore = new OneStore.Client({
+      jsonify: true,
+      onAuthenticationChanged: function() {
+        console.log('Yay, authenticated!')
+      },
+      widgetElementId: 'onestore-button',
+      displayStorageType: false,
+      widgetAuthMethod: 'popup.auto',
+      offlineStorageStrategy: 'localStorage',
+      logger: console
+    });
+  } catch (e) {}
 }
 
 function startGraphIt(code) {

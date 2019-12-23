@@ -185,7 +185,8 @@ textarea {
 .action-item {
   position: absolute;
   top:30px;
-	z-index: 200;
+  z-index: 200;
+  cursor: pointer;
 }
 
 .action-item img {
@@ -196,25 +197,37 @@ textarea {
   width: 20px;
   height: 20px;
 }
-
-#graph-fullscreen {
-	right:157px;
+#onestore-link img {
+  padding-top: 1px;
+  width: 19px;
+  height: 19px;
 }
 
 #more-info {
-  right: 125px;
+  right: 202px;
+}
+
+#graph-fullscreen {
+	right:167px;
 }
 
 #saveImageLink {
-  right: 93px;
+  right: 129px;
+}
+
+.file-upload {
+  right: 90px;
 }
 
 #permalink {
+  right: 57px;
+}
+
+#onestore-link {
   right: 25px;
 }
 
 .file-upload {
-  right: 55px;
   width:24px;
   height:24px;
   overflow:hidden;
