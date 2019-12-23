@@ -65,7 +65,8 @@ function toggleFullScreenGraph(forceFullScreen) {
 	if (forceFullScreen || notFullScreen) {
 		oldGraphCenter = getGraphCenter()
 		$("svg").css("z-index","100")
-		centerGraph(optimalGraphCenter())
+		//centerGraph(optimalGraphCenter())
+		centerGraph(getSVGCenter())
     fullscreen = true
 	} else {
 		$("svg").css("z-index","")
@@ -147,6 +148,10 @@ function getGraphCenter() {
 		// default
 		return [ (1+currentConfigTextareaRatio)*svg.attr("width")/2, svg.attr("height")/2 ]
 	}
+}
+
+function getSVGCenter() {
+  return [ svg.attr("width")/2, svg.attr("height")/2 ]
 }
 
 function optimalGraphCenter() {
