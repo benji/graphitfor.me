@@ -63,9 +63,13 @@ function toHtml(str) {
 }
 
 function updatePermaLink() {
-  var textareaVal = $("#config-textarea").val()
   var baseurl = window.location.href.replace(/\?.*/,"")
-  $("#permalink").attr("href", baseurl+'?d='+LZString.compressToBase64(textareaVal))
+  $("#permalink").attr("href", baseurl+'?d='+getCurrentGraphData())
+}
+
+function getCurrentGraphData() {
+  var textareaVal = $("#config-textarea").val()
+  return LZString.compressToBase64(textareaVal)
 }
 
 function limitLabelSize(str, maxLabelLineChars) {

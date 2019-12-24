@@ -34,12 +34,8 @@ function check(nodes) {
 function initializeGraphIt() {
   console.log("Graphit starts...")
 
-  console.log(QueryString.d)
   if (QueryString.d) {
-    fullscreen = true
-    var code = LZString.decompressFromBase64(QueryString.d)
-    startGraphIt(code)
-    return
+    return loadGraphFromData(QueryString.d)
   }
   
   if (QueryString.f) {
@@ -66,21 +62,10 @@ function initializeGraphIt() {
   startGraphIt()
 }
 
-var onestore
-function loadOnestore() {
-  try {
-    onestore = new OneStore.Client({
-      jsonify: true,
-      onAuthenticationChanged: function() {
-        console.log('Yay, authenticated!')
-      },
-      widgetElementId: 'onestore-button',
-      displayStorageType: false,
-      widgetAuthMethod: 'popup.auto',
-      offlineStorageStrategy: 'localStorage',
-      logger: console
-    });
-  } catch (e) {}
+function loadGraphFromData(data) {
+  fullscreen = true
+  var code = LZString.decompressFromBase64(data)
+  startGraphIt(code)
 }
 
 function startGraphIt(code) {

@@ -36,6 +36,7 @@
     <script src="js/code_loader.js"></script>
     <script src="js/svg-ui.js"></script>
     <script src="js/png-io.js"></script>
+    <script src="js/onestore.js"></script>
     <script src="js/main.js"></script>
   </head>
   <body class="colorscheme1" style="display:none;" onload="javascript:initializeGraphIt()">
@@ -144,8 +145,17 @@ Wetland Loss, Beach Erosion, Coastal Flooding
         </div>
         
         <div id="graphit-side-onestore" class="graphit-side-element" style="display: none">
-          Connect to onestore.io
-          <span id="onestore-button"></span>
+          <div id="onestore-button-container"><span id="onestore-button"></span></div>
+
+          <h4>Save Current Graph</h4>
+          <p id="graph-create-container">
+            <input type="text" name="graphName" id="graphName" /><button onclick="javascript:onestoreSaveGraph()">Save</button>
+          </p>
+
+          <h4>My Graphs</h4>
+          <p>
+            <ul id="graphs"></ul>
+          </p>
         </div>
 
       </div>
