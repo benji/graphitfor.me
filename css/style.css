@@ -262,12 +262,14 @@ textarea {
 
 .action-remove {
   width: 14px;
-  float: right;
 }
 
 ul#graphs li {
   padding: 6px;
   border-bottom: 1px dashed #9e9e9e;
+}
+ul#graphs li a {
+  float: right;
 }
 
 #onestore-button-container {
@@ -306,7 +308,7 @@ ul#graphs li {
   cursor:pointer;
 }
 #graphit-side-onestore li.selected {
-  background: #f3e8ce;
+  background: #d0d0d0;
 }
 
 /************************/
