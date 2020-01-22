@@ -8,9 +8,9 @@ function loadOnestore() {
                 loadGraphs();
             },
             widgetElementId: "onestore-button",
-            displayStorageType: false,
-            widgetAuthMethod: "popup.auto",
+            authMethod: "popup.auto",
             offlineStorageStrategy: "localStorage",
+            widgetDisplayStorageType: false,
             logger: console
         });
     } catch (e) {
@@ -22,7 +22,7 @@ const os_store_name = "graphs";
 var graphs = {};
 
 function loadGraphs() {
-    onestore.list(os_store_name, {}, function(err, response) {
+    onestore.list(os_store_name, { limit: 1000, maxRequests: 50 }, function(err, response) {
         if (err) {
             alert("Failed to load graphs.");
             console.error(err);
